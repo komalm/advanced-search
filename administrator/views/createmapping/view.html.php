@@ -15,7 +15,7 @@ jimport('joomla.application.component.view');
 /**
  * View class for a list of Advsearch.
  */
-class AdvsearchViewCreateindexer extends JViewLegacy
+class AdvsearchViewCreatemapping extends JViewLegacy
 {
 	protected $items;
 	protected $pagination;
@@ -27,22 +27,22 @@ class AdvsearchViewCreateindexer extends JViewLegacy
 	public function display($tpl = null)
 	{
 		$this->state		= $this->get('State');
-		$this->items		= $this->get('Items');
+		$this->item         = $this->get('DataMapp');
 		$this->pagination	= $this->get('Pagination');
 
-		$this->Plugins	= $this->get('Plugins');
+		$this->Indexer	= $this->get('Indexer');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			throw new Exception(implode("\n", $errors));
 		}
-        
+
 		$this->addToolbar();
-        
+
         $input = JFactory::getApplication()->input;
         $view = $input->getCmd('view', '');
         AdvsearchHelper::addSubmenu($view);
-        
+
 		parent::display($tpl);
 	}
 
@@ -51,13 +51,13 @@ class AdvsearchViewCreateindexer extends JViewLegacy
 	 *
 	 * @since	1.6
 	 */
-	protected function addToolBar() 
+	protected function addToolBar()
 	{
 		//JRequest::setVar('hidemainmenu', true);
 		//$isNew = ($this->item->id == 0);
 		$isNew = 0;
-		JToolBarHelper::title($isNew ? JText::_('Add Indexer') : JText::_('Add Indexer'));
-		JToolBarHelper::save('createindexer.saveIndexer');
-		JToolBarHelper::cancel('createindexer.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
+		JToolBarHelper::title($isNew ? JText::_('Add Mapping') : JText::_('Add Mapping'));
+		JToolBarHelper::save('createmapping.saveMapping');
+		JToolBarHelper::cancel('createmapping.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
 	}
 }

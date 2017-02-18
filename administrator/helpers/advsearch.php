@@ -48,6 +48,16 @@ class AdvsearchHelper
 			'index.php?option=com_advsearch&view=searchindexer',
 			$vName == 'searchindexer'
 		);
+		JSubMenuHelper::addEntry(
+			JText::_('COM_ADVSEARCH_CREATE_MAPPING'),
+			'index.php?option=com_advsearch&view=createmapping',
+			$vName == 'createmapping'
+		);
+		JSubMenuHelper::addEntry(
+			JText::_('COM_ADVSEARCH_MAPPING_LIST'),
+			'index.php?option=com_advsearch&view=mapping',
+			$vName == 'mapping'
+		);
 
 		JSubMenuHelper::addEntry(
 			JText::_('COM_ADVSEARCH_TITLE_PLGUINFO'),
@@ -81,6 +91,43 @@ class AdvsearchHelper
 		return $result;
 	}
 
+	/**
+	 * Function to get data
+	 *
+	 * @param   STRING  $table         Name of database table
+	 * @param   STRING  $selectList    Selected value colume name
+	 * @param   STRING  $where         Query where condition
+	 * @param   STRING  $returnObject  Selecting data using JDatabase - link https://docs.joomla.org/Selecting_data_using_JDatabase
+	 *
+	 * @return  true
+	 *
+	 * @since 1.0.0
+	 */
+	public function getDataValues($table, $selectList, $where, $returnObject, $order="")
+	{
+		// Ref - link https://docs.joomla.org/Selecting_data_using_JDatabase
+
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true);
+
+		$query->select($selectList);
+		$query->from($table);
+
+		if ($where)
+		{
+			$query->where($where);
+		}
+
+		if ($order)
+		{
+			$query->order($order);
+		}
+
+		$db->setQuery($query);
+
+
+		return $db->$returnObject();
+	}
 
 	function UseAsDropdown($i, $field_type, $selected_value)
 	{

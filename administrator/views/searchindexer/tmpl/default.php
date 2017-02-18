@@ -153,7 +153,8 @@ $db = JFactory::getDBO();
 					/*$query = "SELECT end_date FROM  #__advanced_search_cronjob WHERE type = '$item->type_name' ORDER BY end_date DESC";
 					$db->setQuery($query);
 					$end_date = $db->loadResult();*/
-					
+					$end_date = '';
+
 					if($end_date)
 						echo $end_date;
 					else
@@ -167,7 +168,8 @@ $db = JFactory::getDBO();
 					/*$query = "SELECT count(id) FROM  ".$db->quoteName('#__advanced_search_zoo_'.$item->type_name);
 					$db->setQuery($query);
 					$count = $db->loadResult();*/
-					
+					$count = '';
+
 					if($count)
 						echo $count;
 					else

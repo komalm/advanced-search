@@ -145,13 +145,15 @@ class AdvsearchModelcreateindexer extends JModelList
 	public function getFields()
 	{
 
+		$AdvsearchHelper  = new AdvsearchHelper;
+
 		$type 	= JRequest::getVar('type');
 		$client = JRequest::getVar('client');
 		$table 	= $client.'_'.$type;
 		$db 	= JFactory::getDBO();
 
 		$adv_search_table_name = $type;
-		$table_string 			= AdvsearchHelper::getTableName($client.'_'.$adv_search_table_name);
+		$table_string 			= $AdvsearchHelper->getTableName($client.'_'.$adv_search_table_name);
 
 		$query = $db->getQuery(true);
 		$query->select('*');
@@ -167,7 +169,8 @@ class AdvsearchModelcreateindexer extends JModelList
 	// This method returns the combo of plugins installed.
 	function getPlugins()
 	{
-
+		$plg_name = '';
+		$disabled = '';
 		if(JRequest::getInt('id'))
 		{
 			$db = JFactory::getDBO();
@@ -302,21 +305,20 @@ class AdvsearchModelcreateindexer extends JModelList
 
 
 		// Code to insert extra fields into the indexer table starts here
-		foreach($post['field_type'] as $key=>$val)
+		foreach ($post['field_type'] as $key => $val)
 		{
-
-			if($post['mapping_field'][$key] > 1)
+			if ($post['mapping_field'][$key] > 1)
 			{
 				$client = $post['client_name'];
 				JPluginHelper::importPlugin('advsearch', $client);
-				$dispatcher =& JDispatcher::getInstance();
-				$Mapping_Extra_Fields = $dispatcher->trigger('getMapping'.$post['field_type'][$key],
-				array($post['field_code'][$key], $post['select_types']));
+				$dispatcher =JDispatcher::getInstance();
+				$Mapping_Extra_Fields = $dispatcher->trigger('getMapping' . $post['field_type'][$key], array($post['field_code'][$key], $post['select_types']));
 			}
 
-			if($Mapping_Extra_Fields)
+			if ($Mapping_Extra_Fields)
+			{
 				$Extra_fields = $Mapping_Extra_Fields[0];
-
+			}
 		}
 
 		// Data insertion into the advanced_search_indexer starts
