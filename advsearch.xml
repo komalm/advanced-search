@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+	<name>com_advsearch</name>
+	<creationDate>2016-07-27</creationDate>
+	<copyright>Copyright (c) 2009-2016 TechJoomla. All rights reserved</copyright>
+	<license>GNU General Public License version 2, or later</license>
+	<author>Techjoomla</author>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>http://www.techjoomla.com</authorUrl>
+	<version>3.1.1</version>
+	<description>COM_SOCIALADS_XML_DESCRIPTION</description>
+<!--
+	<scriptfile>script.socialads.php</scriptfile>
+-->
+	<install>
+		<!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+<!--
+	<media folder="media" destination="com_sa">
+		<folder>css</folder>
+		<folder>fields</folder>
+		<folder>images</folder>
+		<folder>js</folder>
+		<folder>vendors</folder>
+		<file>index.html</file>
+	</media>
+-->
+	<files folder="site">
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>router.php</filename>
+		<filename>advsearch.php</filename>
+		<folder>assets</folder>
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+	</files>
+	<languages folder="site/language">
+		<language tag="en-GB">en-GB/en-GB.com_advsearch.ini</language>
+	</languages>
+	<administration>
+		<menu>COM_ADVSEARCH</menu>
+		<submenu>
+			<menu link="option=com_advsearch&amp;view=createindexer" view="createindexer" img="../.../../media/com_sa/images/s_dashboard.png" alt="AdvSearch/createindexer">create indexer</menu>
+			<menu link="option=com_advsearch&amp;view=pluginfo" view="pluginfo" img="../.../../media/com_sa/images/s_managesa.png" alt="AdvSearch/pluginfo">plugin info</menu>
+			<menu link="option=com_advsearch&amp;view=searchindexer" view="searchindexer" img="../.../../media/com_sa/images/s_zones.png" alt="AdvSearch/searchindexer">search indexer </menu>
+			<menu link="option=com_advsearch&amp;view=stat" view="stat" img="../.../../media/com_sa/images/s_orders.png" alt="AdvSearch/stat">stat</menu>
+		</submenu>
+		<files folder="administrator">
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>index.html</filename>
+			<folder>assets</folder>
+			<filename>advsearch.php</filename>
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>models</folder>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+		</files>
+		<languages folder="administrator/language">
+			<language tag="en-GB">en-GB/en-GB.com_advsearch.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_advsearch.sys.ini</language>
+		</languages>
+	</administration>
+</extension>
